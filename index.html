@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hmtl 5</title>
+	<style type="text/css">
+		body {
+			min-height: 100vh;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		#contenedor-cruz {
+			position: relative;
+			font-size: 1.5rem;
+		}
+
+		.contenedor-2 {
+			position: absolute;
+		}
+
+		.contenedor-2 {
+			display: flex;
+			flex-direction: column;
+		}
+
+		.contenedor-1 span {
+			margin-right: 20px;
+		}
+
+		.contenedor-2 span {
+			margin-bottom: 20px;
+		}
+
+	</style>
+</head>
+<body>
+
+	<div id="contenedor-cruz">
+		<div class="contenedor-1"></div>
+		<div class="contenedor-2"></div>
+	</div>
+	
+	<script type="text/javascript">
+		let contenedor1 = document.querySelector('.contenedor-1'),
+			contenedor2 = document.querySelector('.contenedor-2'),
+			fragment = document.createDocumentFragment(),
+			numero = prompt("Ingrese un numero del 1 al 10"),
+			array = [];
+
+		while (numero > 10 || numero < 1) {
+			alert("El numero debe ser entre 1-10");
+			numero = prompt("Ingrese un numero del 1 al 10");
+		}
+
+		const crearSpan = () => {
+			array = [];
+
+			for (let i = 1; i < (numero*2); i++) {
+				let span = document.createElement('span');
+				span.textContent = i > numero ? (i - (numero * 2)) * -1 : i;
+				array.push(span);
+			}
+
+			array.forEach(element => fragment.appendChild(element));
+
+			return 0;
+		}
+
+		crearSpan();
+
+		contenedor1.appendChild(fragment);
+
+		crearSpan();
+		contenedor2.appendChild(fragment);
+
+		contenedor2.style.top = `calc(50% - ${(contenedor2.scrollHeight / 2) - 6}px)`;
+		contenedor2.style.left = `calc(50% - ${contenedor2.scrollWidth + 1}px)`;
+
+		let spanNumero = document.querySelector(`.contenedor-1 span:nth-child(${numero})`);
+		spanNumero.style.opacity = '0';
+	</script>
+</body>
+</html>
