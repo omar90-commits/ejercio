@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Practica</title>
+	<style type="text/css">
+		.contendor{
+			display: flex;
+		}
+
+		.contenedor-1 {
+			display: flex;
+			justify-content: flex-end;
+			margin-right: 1rem;
+		}
+
+		.contenedor-2 {
+			display: flex;
+			justify-content: flex-start;
+		}
+
+		#contenedor-3 {
+			margin-right: 1rem;
+			display: flex;
+			flex-direction: column-reverse;
+		}
+
+		.contenedor-3 {
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	
+	<div class="contendor">
+		<div id="contenedor-1"></div>
+		<div id="contenedor-3"></div>
+		<div id="contenedor-2"></div>
+	</div>
+
+	<script type="text/javascript">
+		const contenedorUno = document.querySelector('#contenedor-1');
+		const contenedorDos = document.querySelector('#contenedor-2');
+		const contenedorTres = document.querySelector('#contenedor-3');
+
+		let num = parseInt( prompt("numero del 1 al 100") ), cont = 0, guardarNumAnterior = 0;
+
+		while (num > 100 || num < 1) {
+			num = parseInt( prompt("numero del 1 al 100") );
+		}
+
+		guardarNumAnterior = num;
+
+		const crearPriramide = (divPersonalizado, numeroClase) => {
+
+			divPersonalizado = document.createElement('div');
+
+			divPersonalizado.classList.add(`contenedor-${numeroClase}`);
+
+			cont++;	
+
+			for (let i = 1; i <= guardarNumAnterior; i++) {
+				let span = document.createElement('span');
+				
+				span.textContent = guardarNumAnterior;
+				divPersonalizado.appendChild(span);
+			}
+
+			guardarNumAnterior--;
+
+				console.log("numeroClase", numeroClase);
+			switch (numeroClase) {
+				case 1:
+					contenedorUno.appendChild(divPersonalizado);
+				break;
+
+				case 2:
+					contenedorDos.appendChild(divPersonalizado);
+				break;
+
+				case 3:
+					contenedorTres.appendChild(divPersonalizado);
+				break;
+			}
+		}
+
+
+		let tipiDiv = 'div1';
+
+		for (let i = 1; i <= 3; i++) {
+			do { crearPriramide(tipiDiv, i) } while (cont < num);
+			
+			if (i === 2) tipiDiv = 'div2';
+			if (i === 3) tipiDiv = 'div3';
+
+			guardarNumAnterior = num;
+			cont = 0;
+		}
+
+	</script>
+</body>
+</html>
